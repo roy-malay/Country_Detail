@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import axios from "axios"
 import { useParams, Link } from "react-router-dom"
 import Earth_video from "../component/Earth_video"
 
@@ -8,9 +9,8 @@ function CountryDetail() {
     const [data, setData] = useState(null)
 
     useEffect(() => {
-        fetch(`https://restcountries.com/v3.1/name/${country}`)
-            .then(res => res.json())
-            .then(result => setData(result[0]))
+        axios.get(`https://restcountries.com/v3.1/name/${country}`)
+            .then(res => setData(res.data[0]))
             .catch(err => console.log(err))
     }, [country])
 
